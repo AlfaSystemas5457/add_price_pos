@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<templates id="template"
+    xml:space="preserve">
+
+    <t t-name="add_price_pos.ProductCard_inherit"
+        t-inherit="point_of_sale.ProductCard"
+        t-inherit-mode="extension"
+        owl="1">
+
+        <xpath expr="//div[@class='product-content h-100 px-2 rounded-bottom-3 flex-shrink-1']"
+            position="replace">
+            <div class="product-content h-100 px-2 rounded-bottom-3 flex-shrink-1 flex-column justify-content-center"
+                t-att-class="{'d-flex' : !props.isComboPopup, 'my-1': !(props.isComboPopup and !props.imageUrl)}">
+                <div class="overflow-hidden lh-sm product-name"
+                    t-att-class="{
+                        'no-image d-flex justify-content-center align-items-center text-center': !props.imageUrl,
+                        'mt-1': props.isComboPopup and !props.imageUrl
+                    }"
+                    t-attf-id="article_product_{{props.productId}}"
+                    t-esc="props.name" />
+                <separator t-if="props.product.list_price and !props.isComboPopup"
+                    class="my-1"/>
+                <div class="monetary_price d-flex justify-content-start align-items-center mt-1"
+                    t-if="props.product.list_price and !props.isComboPopup">
+                    <span class="">
+                    $
+                    </span>
+                    <span class="product-price"
+                        t-attf-id="article_product_price_{{props.productId}}"
+                        t-esc="props.product.list_price" />
+                </div>
+                <span t-if="props.productCartQty"
+                    t-out="this.productQty"
+                    class="product-cart-qty position-absolute bottom-0 end-0 m-1 px-2 rounded bg-black text-white fs-5 fw-bolder"
+                    t-att-class="{'text-danger': this.productQty lt 0}"/>
+            </div>
+        </xpath>
+
+    </t>
+
+</templates>
