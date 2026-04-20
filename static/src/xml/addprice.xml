@@ -15,8 +15,7 @@
 
         <xpath expr="//div[contains(@class,'product-content')]//div[contains(@class,'product-name')]"
             position="after">
-            <separator t-if="props.product.list_price and !props.isComboPopup"
-                class="my-1"/>
+            <separator t-if="props.product.list_price and !props.isComboPopup"/>
             <div class="monetary_price d-flex justify-content-start align-items-center mt-1"
                 t-if="props.product.list_price and !props.isComboPopup">
                 <span>$</span>
